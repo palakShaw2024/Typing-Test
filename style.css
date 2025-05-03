@@ -5,12 +5,13 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
 body {
     min-height: 100vh;
     background-color: black;
     color: white;   
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     padding: 0 20px;
     
@@ -19,7 +20,7 @@ body {
 
 
 .wrapper {
-   
+    min-width: 70vh;
     background-color: thistle;
     justify-content: center;
     align-items: center;
@@ -29,7 +30,14 @@ body {
     border: 5px solid white;
 }
 
+.wrapper h1 {
+    text-align: center;
+    align-items: center;
+    margin-top: 7px;
+}
+
 .wrapper .content-box {
+    min-width: 80vh;
     padding : 40px 20px ;
     border-radius: 10px;
     border: 5px solid black;
@@ -52,4 +60,36 @@ body {
     justify-content: space-between;
     width: calc(100%  -  140px);
 
+}
+
+.result-details li {
+    display:flex;
+    height: 20px;
+    list-style: none;
+    align-items: center;
+}
+
+.content button {
+    margin-top: 5px;
+    outline: none;
+    border: black 5px solid;
+    color: white;
+    background-color: #39212c;
+    font-size: 16px;
+    padding: 7px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.content button:active {
+    transform: scale(0.92);
+}
+
+.typing-text  span {
+    position: relative;
+}
+
+.typing-text  span.active {
+    color: black;
 }
