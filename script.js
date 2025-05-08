@@ -26,7 +26,7 @@ function loadParagraph() {
           "Learn with your work and mistakes" , 
           "mistakes are the best lesson.", 
           "Improving your skills is in your hands" , 
-          "you are responsibe for the life you live", 
+          "you are responsible for the life you live", 
           "Please communicate if you have recomendation "];
 
 const randomIndex =  Math.floor(Math.random()*paragraph.length);
@@ -50,18 +50,60 @@ function initTyping() {
     const typedChar = input.value.charAt(charIndex); 
 
     if(charIndex < char.length && timeLeft > 0) {
+
+       if(!isTyping) {
+        timer = setInterval(initTimer , 1000);
+        isTyping = true;
+       } 
+
         if (char[charIndex].innerText === typedChar) {
             char[charIndex].classList.add('correct'); 
-            console.log("correct");
+            // console.log("correct");
             // to check the correct character
         }
         else {
+            mistakeCount++;
            char[charIndex].classList.add('incorrect');
-           console.log("incorrect");
+        //    console.log("incorrect");
         }
         charIndex++;
+        mistakes.innerText = mistakeCount;
+        cpm.innerText =  charIndex - mistakeCount;
+    }
+    else {
+        clearInterval(timer);
+        input.value = "";
     }
 }
 
+function initTimer() {
+    if(timeLeft > 0) {
+        timeLeft--;
+        time.innerText = timeLeft;
+        const wpmval = Math.round(((charIndex - mistakeCount)/5)/
+    (maxTime - timeLeft)*60);
+    wpm.innerText = wpmval;
+    }
+    // the wpm function will only work if you are writing the correct alphabet .
+    else {
+        clearInterval(timer);
+    }
+}
+
+function reset() {
+    loadParagraph();
+    clearInterval(timer);
+    timeLeft = maxTime;
+    charIndex = 0;
+    mistakeCount = 0;
+    isTyping = false;
+    input.value = "";
+    mistakes.innerText = mistakeCount;
+    time.innerText = timeLeft;
+    wpm.innerText = 0;
+    cpm.innerText = 0;   
+}
+
 input.addEventListener("input", initTyping); 
+btn.addEventListener("click", reset);
 loadParagraph();
